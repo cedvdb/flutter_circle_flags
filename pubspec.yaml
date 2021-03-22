@@ -1,8 +1,7 @@
 name: circle_flags
-description: A new Flutter package project.
+description: A collection of roundd flags
 version: 0.0.1
-author:
-homepage:
+repository: https://github.com/cedvdb/flutter_circle_flags
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
