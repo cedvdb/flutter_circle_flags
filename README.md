@@ -17,3 +17,11 @@ to view all flags https://hatscripts.github.io/circle-flags/all-flags.html
 
 ## Usage
 
+```dart
+
+// use a valid country code
+CircleFlag('us');
+CircleFlag('fr');
+CircleFlag('es');
+
+```
