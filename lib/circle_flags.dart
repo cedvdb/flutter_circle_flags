@@ -7,7 +7,8 @@ class CircleFlag extends StatelessWidget {
   final String countryCode;
   final double? size;
 
-  CircleFlag(this.countryCode, {this.size});
+  CircleFlag(String countryCode, {this.size})
+      : countryCode = countryCode.toLowerCase();
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +16,7 @@ class CircleFlag extends StatelessWidget {
       width: size,
       height: size,
       child: Image.asset(
-        'assets/png/$countryCode.png',
+        'assets/png/${countryCode}.png',
         package: 'circle_flags',
       ),
     );
