@@ -9,6 +9,8 @@ else
 
 fi
 
+echo 'warning: AC TA AND BQ must be renamed from sh-ac, sh-ta, bq-bo'
+
 for file in $PWD/svg/*.svg
     do
 
@@ -22,3 +24,4 @@ for file in $PWD/svg/*.svg
     done
 
 echo 'all done';
+echo 'warning: AC TA AND BQ must be renamed from sh-ac, sh-ta, bq-bo'
