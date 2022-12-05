@@ -1,72 +1,76 @@
 library circle_flags;
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:jovial_svg/jovial_svg.dart';
 
 /// a rounded flag
 class CircleFlag extends StatelessWidget {
   final String countryCode;
-  final double? size;
-  late final String assetName;
+  final double size;
 
-  CircleFlag(this.countryCode, {Key? key, this.size}) : super(key: key) {
-    assetName =
-    'packages/circle_flags/assets/jovial/${countryCode.toLowerCase()}.si';
-  }
+  final Widget Function(BuildContext)? onLoading;
+
+  final Color? placeholderBackgroundColor;
+  final Color? placeholderTextColor;
+
+  const CircleFlag(this.countryCode,
+      {Key? key,
+      this.size = 48,
+      this.onLoading,
+      this.placeholderBackgroundColor,
+      this.placeholderTextColor})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final size = this.size ?? 48;
-
     return SizedBox(
       width: size,
       height: size,
       child: ScalableImageWidget.fromSISource(
-        si: ScalableImageSource.fromSI(rootBundle, assetName),
-        onLoading: (context) => _Loading(size: size),
-        onError: (context) => _Error(size: size, countryCode: countryCode),
+        si: ScalableImageSource.fromSI(
+            DefaultAssetBundle.of(context),
+            'packages/circle_flags/assets/jovial/${countryCode.toLowerCase()}.si'
+        ),
+        onLoading: onLoading ?? _buildPlaceholder,
+        onError: _buildPlaceholder,
       ),
     );
   }
-}
 
-class _Loading extends StatelessWidget {
-  final double size;
-
-  const _Loading({Key? key, required this.size}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: size,
-      height: size,
-      child: const CircularProgressIndicator(),
+  Widget _buildPlaceholder(BuildContext context) {
+    return _Placeholder(
+      size: size,
+      countryCode: countryCode,
+      backgroundColor: placeholderBackgroundColor,
+      textColor: placeholderTextColor,
     );
   }
 }
 
-class _Error extends StatelessWidget {
+class _Placeholder extends StatelessWidget {
   final double size;
   final String countryCode;
+  final Color? backgroundColor;
+  final Color? textColor;
 
-  const _Error({Key? key, required this.size, required this.countryCode}) : super(key: key);
+  const _Placeholder({Key? key, required this.size, required this.countryCode, this.backgroundColor, this.textColor}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+
     return Container(
       width: size,
       height: size,
       padding: const EdgeInsets.all(8),
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: Colors.grey,
+        color: backgroundColor ?? Theme.of(context).colorScheme.primaryContainer,
       ),
       child: Text(
         countryCode,
         textAlign: TextAlign.center,
-        style: const TextStyle(
-          color: Colors.white,
+        style: TextStyle(
+          color: textColor ?? Theme.of(context).colorScheme.onPrimaryContainer,
         ),
       ),
     );
