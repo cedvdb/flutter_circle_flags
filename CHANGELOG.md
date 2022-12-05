@@ -1,3 +1,7 @@
+## [1.0.0]
+
+* use svg for smaller memory footprint
+
 ## [0.0.3]
 
 * added 3 missing flags
