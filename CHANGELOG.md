@@ -1,3 +1,7 @@
+## [1.0.1]
+
+* use sensible defaults for svgs placeholders
+
 ## [1.0.0]
 
 * use svg for smaller memory footprint
