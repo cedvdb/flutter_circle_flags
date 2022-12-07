@@ -1,3 +1,7 @@
+## [1.0.3]
+
+* (Re)-added netherlands antilla's flag
+
 ## [1.0.2]
 
 * add clipOval around flag for better rendering of svgs on the web
