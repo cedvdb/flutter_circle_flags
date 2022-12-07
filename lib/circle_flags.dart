@@ -9,17 +9,19 @@ class CircleFlag extends StatelessWidget {
   final double size;
   final String assetName;
 
-  CircleFlag(this.countryCode, {Key? key, this.size = 48}) :
-        assetName = 'assets/svg/${countryCode.toLowerCase()}.svg',
+  CircleFlag(this.countryCode, {Key? key, this.size = 48})
+      : assetName = 'assets/svg/${countryCode.toLowerCase()}.svg',
         super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SvgPicture.asset(
-      assetName,
-      width: size,
-      height: size,
-      package: 'circle_flags',
+    return ClipOval(
+      child: SvgPicture.asset(
+        assetName,
+        width: size,
+        height: size,
+        package: 'circle_flags',
+      ),
     );
   }
 }

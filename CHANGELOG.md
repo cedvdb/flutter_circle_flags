@@ -1,3 +1,7 @@
+## [1.0.2]
+
+* add clipOval around flag for better rendering of svgs on the web
+
 ## [1.0.1]
 
 * use sensible defaults for svgs placeholders
