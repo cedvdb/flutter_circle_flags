@@ -1,3 +1,7 @@
+## [1.0.4]
+
+* increase `package:flutter_svg` version
+
 ## [1.0.3]
 
 * (Re)-added netherlands antilla's flag
