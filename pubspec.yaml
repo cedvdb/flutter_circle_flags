@@ -1,6 +1,6 @@
 name: circle_flags
 description: A collection of roundd flags
-version: 1.0.5
+version: 1.0.4
 repository: https://github.com/cedvdb/flutter_circle_flags
 
 environment:
@@ -13,6 +13,7 @@ dependencies:
   flutter_svg: ^2.0.0
 
 dev_dependencies:
+  flutter_lints: ^2.0.1
   flutter_test:
     sdk: flutter
 
