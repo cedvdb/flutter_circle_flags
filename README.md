@@ -29,9 +29,9 @@ CircleFlag('es');
 # Preloading
 
 ```dart
-// this will preload those flags
-for (var isoCode in ['US', 'FR']) { 
-    CircleFlag.preload(isoCode.name);
+// this will preload all flags
+for (var isoCode in ['fr', 'us']) {
+  CircleFlagLoader.load(isoCode.name);
 }
 ```
 

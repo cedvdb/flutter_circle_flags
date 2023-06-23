@@ -1,3 +1,6 @@
+## [2.0.8]
+* Change just introduced caching api
+
 ## [2.0.7]
 * Fix issue with network flags not correctly loaded
 * improve caching

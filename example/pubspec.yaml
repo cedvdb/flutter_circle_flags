@@ -32,7 +32,7 @@ dependencies:
     sdk: flutter
   circle_flags:
     path: ../
-  dart_countries: ^3.0.3
+  phone_numbers_parser: ^8.0.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
