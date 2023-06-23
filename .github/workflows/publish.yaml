@@ -22,6 +22,6 @@ jobs:
       - uses: subosito/flutter-action@v2.10.0
       - name: Install dependencies
         run: flutter pub get
-
       - name: Publish
         run: flutter pub publish --force
+# comment to trigger publish
