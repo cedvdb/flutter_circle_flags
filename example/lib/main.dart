@@ -21,7 +21,8 @@ class _MyAppState extends State<MyApp> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     for (var isoCode in IsoCode.values) {
-      CircleFlagLoader.load(isoCode.name);
+      precacheImage(NetworkImage(CircleFlag.computeUrl(isoCode.name)), context,
+          size: const Size(32, 32));
     }
   }
 
