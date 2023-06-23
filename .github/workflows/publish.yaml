@@ -2,8 +2,6 @@ name: Release
 
 on:
   push:
-    branches:
-      - main
     tags:
       - "v[0-9]+.[0-9]+.[0-9]+"
 
@@ -15,6 +13,9 @@ jobs:
       id-token: write
     runs-on: ubuntu-latest
     steps:
+      - name: Exit if not on main branch
+        if: endsWith(github.ref, 'main') == false
+        run: exit -1
       - uses: actions/checkout@v3
       # For Flutter package
       - uses: dart-lang/setup-dart@v1
@@ -24,4 +25,3 @@ jobs:
 
       - name: Publish
         run: flutter pub publish --force
-# comment to trigger action
