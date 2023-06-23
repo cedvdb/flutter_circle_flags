@@ -5,7 +5,6 @@ repository: https://github.com/cedvdb/flutter_circle_flags
 
 environment:
   sdk: ">=2.15.0"
-  flutter: ">=2.0.0"
 
 dependencies:
   flutter:
