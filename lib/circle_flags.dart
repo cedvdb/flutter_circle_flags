@@ -28,6 +28,14 @@ class _CircleFlagState extends State<CircleFlag> {
   }
 
   @override
+  void didUpdateWidget(covariant CircleFlag oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.isoCode != widget.isoCode) {
+      loader = CircleFlagLoader(widget.isoCode);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return ClipOval(
       child: SizedBox(

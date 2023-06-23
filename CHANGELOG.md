@@ -1,3 +1,6 @@
+## [2.0.9]
+* recreate loader when iso code changes
+
 ## [2.0.8]
 * Change just introduced caching api
 
