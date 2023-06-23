@@ -1,3 +1,7 @@
+## [2.0.1]
+* add auto publish
+
+
 ## [2.0.0]
 
 * use network image
