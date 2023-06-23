@@ -1,5 +1,8 @@
-## [2.0.4]
+## [2.0.5]
 * add github action auto publish
+
+## [2.0.4]
+* attempt github action auto publish
 
 ## [2.0.3]
 * attempt github action auto publish
