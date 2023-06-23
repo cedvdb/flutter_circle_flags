@@ -21,7 +21,7 @@ class _MyAppState extends State<MyApp> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     for (var isoCode in IsoCode.values) {
-      CircleFlag.preload(isoCode.name);
+      CircleFlagLoader.load(isoCode.name);
     }
   }
 
@@ -39,6 +39,7 @@ class _MyAppState extends State<MyApp> {
           title: const Text('flags'),
         ),
         body: ListView(
+          cacheExtent: 100,
           children: [
             for (var isoCode in IsoCode.values)
               Padding(
