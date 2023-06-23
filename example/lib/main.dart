@@ -1,5 +1,5 @@
+import 'package:dart_countries/dart_countries.dart';
 import 'package:flutter/material.dart';
-import 'countries.dart';
 import 'package:circle_flags/circle_flags.dart';
 
 void main() {
@@ -18,28 +18,22 @@ class MyApp extends StatelessWidget {
       ),
       home: Scaffold(
         appBar: AppBar(
-          title: Text('flags'),
+          title: const Text('flags'),
         ),
-        body: Container(
-          // child: CircleFlag(
-          //   'be',
-          //   size: 25,
-          // ),
-          child: ListView(
-            children: [
-              for (var country in countries)
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ListTile(
-                    leading: CircleFlag(
-                      country.countryCode,
-                      size: 32,
-                    ),
-                    title: Text(country.name),
+        body: ListView(
+          children: [
+            for (var isoCode in IsoCode.values)
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ListTile(
+                  leading: CircleFlag(
+                    isoCode.name,
+                    size: 32,
                   ),
-                )
-            ],
-          ),
+                  title: Text(isoCode.name),
+                ),
+              )
+          ],
         ),
       ),
     );
