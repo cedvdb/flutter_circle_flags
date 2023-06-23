@@ -6,7 +6,25 @@ void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    for (var isoCode in IsoCode.values) {
+      CircleFlag.preload(isoCode.name);
+    }
+  }
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {

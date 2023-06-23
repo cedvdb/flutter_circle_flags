@@ -26,6 +26,15 @@ CircleFlag('es');
 
 ```
 
+# Preloading
+
+```dart
+// this will preload all flags
+    for (var isoCode in IsoCode.values) {
+      CircleFlag.preload(isoCode.name);
+    }
+```
+
 
 # Issues & Contributing 
 

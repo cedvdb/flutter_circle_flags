@@ -1,12 +1,10 @@
-## [2.0.7]
-* auto publishing of package for testing  (release has no impact)
-
-## [2.0.6]
-* add github action auto publish  (release has no impact)
+## [2.0.8]
+* Fix issue with network flags not correctly loaded
+* improve caching
 
 ## [2.0.0]
 
-* use network image
+* use network image to reduce size
 * added ability to preload images
 
 ## [1.0.4]
