@@ -1,5 +1,8 @@
+## [2.0.7]
+* auto publishing of package for testing  (release has no impact)
+
 ## [2.0.6]
-* add github action auto publish 
+* add github action auto publish  (release has no impact)
 
 ## [2.0.0]
 
