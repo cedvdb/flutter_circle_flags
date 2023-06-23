@@ -25,3 +25,12 @@ CircleFlag('fr');
 CircleFlag('es');
 
 ```
+
+
+# Issues & Contributing 
+
+This package uses flags from https://github.com/HatScripts/circle-flags
+
+If a change is required to one of the flag the issue should be opened in that repository.
+
+

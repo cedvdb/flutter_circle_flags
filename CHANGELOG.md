@@ -1,3 +1,8 @@
+## [2.0.0]
+
+* use network image
+* added ability to preload images
+
 ## [1.0.4]
 
 * increase `package:flutter_svg` version
