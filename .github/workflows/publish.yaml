@@ -1,27 +1,27 @@
-name: Release
+# name: Release
 
-on:
-  push:
-    tags:
-      - "v[0-9]+.[0-9]+.[0-9]+"
+# on:
+#   push:
+#     tags:
+#       - "v[0-9]+.[0-9]+.[0-9]+"
 
-jobs:
-  release:
-    permissions:
-      contents: write
-      pull-requests: write
-      id-token: write
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Exit if not on main branch
-        if: endsWith(github.event.base_ref, 'main') == false
-        run: exit -1
-      # For Flutter package
-      - uses: dart-lang/setup-dart@v1
-      - uses: subosito/flutter-action@v2.10.0
-      - name: Install dependencies
-        run: flutter pub get
-      - name: Publish
-        run: flutter pub publish --force
-# comment to trigger publish
+# jobs:
+#   release:
+#     permissions:
+#       contents: write
+#       pull-requests: write
+#       id-token: write
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v3
+#       - name: Exit if not on main branch
+#         if: endsWith(github.event.base_ref, 'main') == false
+#         run: exit -1
+#       # For Flutter package
+#       - uses: dart-lang/setup-dart@v1
+#       - uses: subosito/flutter-action@v2.10.0
+#       - name: Install dependencies
+#         run: flutter pub get
+#       - name: Publish
+#         run: flutter pub publish --force
+# # comment to trigger publish
