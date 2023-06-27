@@ -11,6 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_svg: ^2.0.7
+  jovial_svg: ^1.1.15
 
 dev_dependencies:
   flutter_lints: ^2.0.1
@@ -22,4 +23,4 @@ dev_dependencies:
 
 flutter:
   assets:
-    - assets/svg/
+    - assets/si/
