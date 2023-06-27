@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:circle_flags/circle_flags.dart';
 import 'package:phone_numbers_parser/phone_numbers_parser.dart';
@@ -14,9 +16,13 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  late Future<List<Uint8List>> preloadedFlags;
+
   @override
   void initState() {
     super.initState();
+    final isoCodes = IsoCode.values.map((iso) => iso.name);
+    preloadedFlags = CircleFlag.preload(isoCodes);
   }
 
   // This widget is the root of your application.
@@ -32,21 +38,26 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text('flags'),
         ),
-        body: ListView(
-          cacheExtent: 100,
-          children: [
-            for (var isoCode in IsoCode.values)
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ListTile(
-                  leading: CircleFlag(
-                    isoCode.name,
-                    size: 32,
-                  ),
-                  title: Text(isoCode.name),
-                ),
-              )
-          ],
+        body: FutureBuilder(
+          future: preloadedFlags,
+          builder: (ctx, snapshot) => snapshot.hasData
+              ? ListView(
+                  cacheExtent: 100,
+                  children: [
+                    for (var isoCode in IsoCode.values)
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ListTile(
+                          leading: CircleFlag(
+                            isoCode.name,
+                            size: 32,
+                          ),
+                          title: Text(isoCode.name),
+                        ),
+                      )
+                  ],
+                )
+              : const CircularProgressIndicator(),
         ),
       ),
     );
