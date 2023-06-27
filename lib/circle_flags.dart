@@ -27,20 +27,6 @@ class CircleFlag extends StatelessWidget {
     return Future.wait(tasks);
   }
 
-  static loadAsset(String assetName) {
-    return rootBundle
-        .load(assetName)
-        .then((data) => Uint8List.sublistView(data))
-        // on error try to use the question mark flag
-        .catchError((e) => rootBundle
-            .load(computeAssetName('xx'))
-            .then((data) => Uint8List.sublistView(data)));
-  }
-
-  static String computeAssetName(String isoCode) {
-    return 'packages/circle_flags/assets/optimized/${isoCode.toLowerCase()}.svg.vec';
-  }
-
   @override
   Widget build(BuildContext context) {
     return ClipOval(
