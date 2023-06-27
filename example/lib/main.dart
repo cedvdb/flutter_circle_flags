@@ -14,7 +14,8 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  late Future<List<PreloadedFlagLoader>> preloadedLoaders;
+  late final FlagCache _cache = FlagCache();
+  late Future<void> preloading;
 
   @override
   void initState() {
@@ -25,9 +26,7 @@ class _MyAppState extends State<MyApp> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     final isoCodes = IsoCode.values.map((iso) => iso.name);
-    preloadedLoaders = Future.wait(
-      isoCodes.map((isoCode) => PreloadedFlagLoader.create(isoCode, context)),
-    );
+    preloading = _cache.preload(isoCodes);
   }
 
   // This widget is the root of your application.
@@ -44,22 +43,24 @@ class _MyAppState extends State<MyApp> {
           title: const Text('flags'),
         ),
         body: FutureBuilder(
-          future: preloadedLoaders,
-          builder: (ctx, snapshot) => snapshot.hasData
-              ? ListView.builder(
-                  itemCount: snapshot.requireData.length,
-                  itemBuilder: (context, index) => Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: ListTile(
-                      leading: CircleFlag.fromLoader(
-                        snapshot.requireData[index],
-                        size: 32,
+          future: preloading,
+          builder: (ctx, snapshot) =>
+              snapshot.connectionState == ConnectionState.done
+                  ? ListView.builder(
+                      itemCount: IsoCode.values.length,
+                      itemBuilder: (context, index) => Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ListTile(
+                          leading: CircleFlag(
+                            IsoCode.values[index].name,
+                            size: 32,
+                            cache: _cache,
+                          ),
+                          title: Text(IsoCode.values[index].name),
+                        ),
                       ),
-                      title: Text(IsoCode.values[index].name),
-                    ),
-                  ),
-                )
-              : const CircularProgressIndicator(),
+                    )
+                  : const CircularProgressIndicator(),
         ),
       ),
     );
