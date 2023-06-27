@@ -3,6 +3,7 @@ library circle_flags;
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:vector_graphics/vector_graphics.dart';
 
@@ -31,14 +32,24 @@ class CircleFlag extends StatelessWidget {
     final imagesBytes = <Future<Uint8List>>[];
     for (final isoCode in isoCodes) {
       final assetName = computeAssetName(isoCode);
-      // final bytes = loadAsset(assetName);
+      final bytes = loadAsset(assetName);
       imagesBytes.add(bytes);
     }
     return Future.wait(imagesBytes);
   }
 
+  static loadAsset(String assetName) {
+    return rootBundle
+        .load(assetName)
+        .then((data) => Uint8List.sublistView(data))
+        // on error try to use the question mark flag
+        .catchError((e) => rootBundle
+            .load(computeAssetName('xx'))
+            .then((data) => Uint8List.sublistView(data)));
+  }
+
   static String computeAssetName(String isoCode) {
-    return 'packages/circle_flags/assets/svg/${isoCode.toLowerCase()}.svg';
+    return 'packages/circle_flags/assets/optimized/${isoCode.toLowerCase()}.svg.vec';
   }
 
   @override
