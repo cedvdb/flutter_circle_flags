@@ -1,3 +1,7 @@
+## [3.0.0]
+* revert to assets
+* add a preloading method to improve first render performance
+
 ## [2.0.9]
 * recreate loader when iso code changes
 

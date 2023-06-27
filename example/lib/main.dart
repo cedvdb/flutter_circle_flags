@@ -41,21 +41,18 @@ class _MyAppState extends State<MyApp> {
         body: FutureBuilder(
           future: preloadedFlags,
           builder: (ctx, snapshot) => snapshot.hasData
-              ? ListView(
-                  cacheExtent: 100,
-                  children: [
-                    for (var isoCode in IsoCode.values)
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: ListTile(
-                          leading: CircleFlag(
-                            isoCode.name,
-                            size: 32,
-                          ),
-                          title: Text(isoCode.name),
-                        ),
-                      )
-                  ],
+              ? ListView.builder(
+                  itemCount: snapshot.requireData.length,
+                  itemBuilder: (context, index) => Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ListTile(
+                      leading: CircleFlag.fromMemory(
+                        snapshot.requireData[index],
+                        size: 32,
+                      ),
+                      title: Text(IsoCode.values[index].name),
+                    ),
+                  ),
                 )
               : const CircularProgressIndicator(),
         ),

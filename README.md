@@ -26,6 +26,21 @@ CircleFlag('es');
 
 ```
 
+# Preloading
+
+You might want to preload images for a smoother list scrolling experience:
+
+```dart
+// see full example in example
+// preload bytes
+preloadedFlags = CircleFlag.preload(isoCodes);
+// use bytes
+CircleFlag.fromMemory(
+  snapshot.requireData[index],
+)
+
+```
+
 # Issues & Contributing
 
 This package uses flags from https://github.com/HatScripts/circle-flags
