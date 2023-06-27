@@ -13,7 +13,7 @@ class CircleFlag extends StatelessWidget {
   final SvgLoader loader;
 
   CircleFlag(String isoCode, {super.key, this.size = 48})
-      : loader = SvgAssetLoader(isoCode);
+      : loader = SvgAssetLoader(computeAssetName(isoCode));
 
   CircleFlag.fromLoader(this.loader, {super.key, this.size = 48});
 
@@ -31,9 +31,9 @@ class CircleFlag extends StatelessWidget {
   static Future<List<Uint8List>> preload2(Iterable<String> isoCodes) {
     final imagesBytes = <Future<Uint8List>>[];
     for (final isoCode in isoCodes) {
-      final assetName = computeAssetName(isoCode);
-      final bytes = loadAsset(assetName);
-      imagesBytes.add(bytes);
+      // final assetName = computeAssetName(isoCode);
+      // final bytes = loadAsset(assetName);
+      // imagesBytes.add(bytes);
     }
     return Future.wait(imagesBytes);
   }
