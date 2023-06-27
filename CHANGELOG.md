@@ -1,3 +1,9 @@
+## [3.0.0]
+* not found flags will display a "?" flag
+* revert to assets loading
+* Add a flag loader that uses flutter_svg optimized svg
+* add a preloading method to improve first render performance
+
 ## [2.0.9]
 * recreate loader when iso code changes
 

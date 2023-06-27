@@ -1,7 +1,5 @@
 library circle_flags;
 
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
@@ -17,14 +15,16 @@ class CircleFlag extends StatelessWidget {
 
   CircleFlag.fromLoader(this.loader, {super.key, this.size = 48});
 
-  static Future<List<Uint8List>> preload2(Iterable<String> isoCodes) {
-    final imagesBytes = <Future<Uint8List>>[];
+  static Future<void> preload(Iterable<String> isoCodes,
+      [BuildContext? context]) {
+    final tasks = <Future>[];
     for (final isoCode in isoCodes) {
-      final assetName = computeAssetName(isoCode);
-      final bytes = loadAsset(assetName);
-      imagesBytes.add(bytes);
+      final loader = FlagLoader(isoCode);
+      final task =
+          svg.cache.putIfAbsent(loader, () => loader.loadBytes(context));
+      tasks.add(task);
     }
-    return Future.wait(imagesBytes);
+    return Future.wait(tasks);
   }
 
   static loadAsset(String assetName) {
