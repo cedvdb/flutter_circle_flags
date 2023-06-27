@@ -14,9 +14,12 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  late Future preloading;
+
   @override
   void initState() {
     super.initState();
+    preloading = CircleFlag.preload(IsoCode.values.map((e) => e.name));
   }
 
   // This widget is the root of your application.
@@ -32,16 +35,19 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text('flags'),
         ),
-        body: ListView.builder(
-          itemCount: IsoCode.values.length,
-          itemBuilder: (ctx, index) => Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ListTile(
-              leading: CircleFlag(
-                IsoCode.values[index].name,
-                size: 32,
+        body: FutureBuilder(
+          future: preloading,
+          builder: (ctx, snapshot) => ListView.builder(
+            itemCount: IsoCode.values.length,
+            itemBuilder: (ctx, index) => Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ListTile(
+                leading: CircleFlag(
+                  IsoCode.values[index].name,
+                  size: 32,
+                ),
+                title: Text(IsoCode.values[index].name),
               ),
-              title: Text(IsoCode.values[index].name),
             ),
           ),
         ),
