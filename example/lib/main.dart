@@ -14,9 +14,13 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  late final Future<List<ScalableImage>> preloadedImages;
+
   @override
   void initState() {
     super.initState();
+    final isoCodes = IsoCode.values.map((isoCode) => isoCode.name);
+    preloadedImages = CircleFlag.preload(isoCodes);
   }
 
   // This widget is the root of your application.
@@ -33,19 +37,25 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text('flags'),
         ),
-        body: ListView.builder(
-          itemCount: isoCodes.length,
-          itemBuilder: (ctx, index) => Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ListTile(
-              leading: CircleFlag(
-                isoCodes[index].name,
-                size: 32,
-              ),
-              title: Text(isoCodes[index].name),
-            ),
-          ),
-        ),
+        body: FutureBuilder(
+            future: preloadedImages,
+            builder: (ctx, snap) {
+              return snap.hasData
+                  ? ListView.builder(
+                      itemCount: snap.requireData.length,
+                      itemBuilder: (ctx, index) => Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ListTile(
+                          leading: CircleFlag.fromPreloadedImage(
+                            snap.requireData[index],
+                            size: 32,
+                          ),
+                          title: Text(isoCodes[index].name),
+                        ),
+                      ),
+                    )
+                  : const CircularProgressIndicator();
+            }),
       ),
     );
   }
