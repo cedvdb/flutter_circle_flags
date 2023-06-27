@@ -27,6 +27,16 @@ class CircleFlag extends StatelessWidget {
     return Future.wait(imagesBytes);
   }
 
+  static Future<List<Uint8List>> preload2(Iterable<String> isoCodes) {
+    final imagesBytes = <Future<Uint8List>>[];
+    for (final isoCode in isoCodes) {
+      final assetName = computeAssetName(isoCode);
+      // final bytes = loadAsset(assetName);
+      imagesBytes.add(bytes);
+    }
+    return Future.wait(imagesBytes);
+  }
+
   static String computeAssetName(String isoCode) {
     return 'packages/circle_flags/assets/svg/${isoCode.toLowerCase()}.svg';
   }
