@@ -3,6 +3,7 @@ library circle_flags;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:vector_graphics/vector_graphics.dart';
 
 /// a rounded flag
@@ -77,10 +78,12 @@ class PreloadedFlagLoader extends FlagLoader {
     return SynchronousFuture(data);
   }
 
-  static Future<PreloadedFlagLoader> create(String isoCode) async {
+  static Future<PreloadedFlagLoader> create(String isoCode,
+      [BuildContext? context]) async {
     final assetName = FlagLoader.computeAssetName(isoCode);
     final data = await loadAsset(assetName);
-    return PreloadedFlagLoader._(isoCode, data);
+    final loader = PreloadedFlagLoader._(isoCode, data);
+    return loader;
   }
 
   static loadAsset(String assetName, [BuildContext? context]) {
