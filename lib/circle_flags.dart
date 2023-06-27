@@ -17,11 +17,17 @@ class CircleFlag extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClipOval(
-      child: VectorGraphic(
-        loader: loader,
-        width: size,
-        height: size,
+    return RepaintBoundary(
+      child: ClipOval(
+        child: SizedBox(
+          height: size,
+          width: size,
+          child: VectorGraphic(
+            loader: loader,
+            width: size,
+            height: size,
+          ),
+        ),
       ),
     );
   }

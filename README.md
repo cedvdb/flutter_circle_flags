@@ -1,6 +1,6 @@
 # circle_flags
 
-A collection of circular country flags. 
+A collection of circular country flags optimized for list rendering.
 
 ## Demo
 
@@ -25,6 +25,36 @@ CircleFlag('fr');
 CircleFlag('es');
 
 ```
+
+# Preloading
+
+To preload flags before displaying a list, `PreloadedFlagLoader` can be used
+
+```dart
+    preloadedLoaders = Future.wait(['fr', 'us']
+        .map((isoCode) => PreloadedFlagLoader.create(isoCode)));
+```
+and then used those preloaders can be passed to circle flag
+
+```dart
+FutureBuilder(
+  future: preloadedLoaders,
+  builder: (ctx, snapshot) => snapshot.hasData
+      ? ListView.builder(
+          itemCount: IsoCode.values.length,
+          itemBuilder: (ctx, index) => Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ListTile(
+              leading: CircleFlag.fromLoader(
+                snapshot.requireData[index],
+              ),
+            ),
+          ),
+        )
+      : const CircularProgressIndicator(),
+),
+```
+
 
 # Issues & Contributing
 
