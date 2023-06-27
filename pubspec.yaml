@@ -1,5 +1,5 @@
 name: circle_flags
-description: A collection of roundd flags
+description: A collection of round flags
 version: 3.0.0
 repository: https://github.com/cedvdb/flutter_circle_flags
 
@@ -17,7 +17,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   dart_countries: ^3.0.3
-  vector_graphics_compiler:
+  vector_graphics_compiler: ^1.1.7
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
