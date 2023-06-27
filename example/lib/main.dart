@@ -1,7 +1,5 @@
-import 'dart:typed_data';
-
-import 'package:flutter/material.dart';
 import 'package:circle_flags/circle_flags.dart';
+import 'package:flutter/material.dart';
 import 'package:phone_numbers_parser/phone_numbers_parser.dart';
 
 void main() {
@@ -16,13 +14,20 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  late Future<List<Uint8List>> preloadedFlags;
+  late Future<List<PreloadedFlagLoader>> preloadedLoaders;
 
   @override
   void initState() {
     super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
     final isoCodes = IsoCode.values.map((iso) => iso.name);
-    preloadedFlags = CircleFlag.preload(isoCodes);
+    preloadedLoaders = Future.wait(
+      isoCodes.map((isoCode) => PreloadedFlagLoader.create(isoCode, context)),
+    );
   }
 
   // This widget is the root of your application.
@@ -39,14 +44,14 @@ class _MyAppState extends State<MyApp> {
           title: const Text('flags'),
         ),
         body: FutureBuilder(
-          future: preloadedFlags,
+          future: preloadedLoaders,
           builder: (ctx, snapshot) => snapshot.hasData
               ? ListView.builder(
                   itemCount: snapshot.requireData.length,
                   itemBuilder: (context, index) => Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: ListTile(
-                      leading: CircleFlag.fromMemory(
+                      leading: CircleFlag.fromLoader(
                         snapshot.requireData[index],
                         size: 32,
                       ),
