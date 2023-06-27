@@ -5,19 +5,19 @@ import 'package:vector_graphics/vector_graphics.dart';
 
 /// a rounded flag
 class CircleFlag extends StatelessWidget {
-  final String countryCode;
+  final String isoCode;
   final double size;
   final String assetName;
 
-  CircleFlag(this.countryCode, {Key? key, this.size = 48})
-      : assetName = 'assets/optimized/${countryCode.toLowerCase()}.svg.vec',
-        super(key: key);
+  CircleFlag(this.isoCode, {super.key, this.size = 48})
+      : assetName =
+            'packages/circle_flags/assets/optimized/${isoCode.toLowerCase()}.svg.vec';
 
   @override
   Widget build(BuildContext context) {
     return ClipOval(
       child: VectorGraphic(
-        loader: AssetBytesLoader(assetName, packageName: 'circle_flags'),
+        loader: AssetBytesLoader(assetName),
         width: size,
         height: size,
       ),

@@ -32,21 +32,18 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text('flags'),
         ),
-        body: ListView(
-          cacheExtent: 100,
-          children: [
-            for (var isoCode in IsoCode.values)
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ListTile(
-                  leading: CircleFlag(
-                    isoCode.name,
-                    size: 32,
-                  ),
-                  title: Text(isoCode.name),
-                ),
-              )
-          ],
+        body: ListView.builder(
+          itemCount: IsoCode.values.length,
+          itemBuilder: (ctx, index) => Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ListTile(
+              leading: CircleFlag(
+                IsoCode.values[index].name,
+                size: 32,
+              ),
+              title: Text(IsoCode.values[index].name),
+            ),
+          ),
         ),
       ),
     );
