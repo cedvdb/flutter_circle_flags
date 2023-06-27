@@ -1,8 +1,8 @@
 library circle_flags;
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:vector_graphics/vector_graphics.dart';
 
 /// a rounded flag
@@ -14,18 +14,6 @@ class CircleFlag extends StatelessWidget {
       : loader = FlagLoader(isoCode);
 
   CircleFlag.fromLoader(this.loader, {super.key, this.size = 48});
-
-  static Future<void> preload(Iterable<String> isoCodes,
-      [BuildContext? context]) {
-    final tasks = <Future>[];
-    for (final isoCode in isoCodes) {
-      final loader = FlagLoader(isoCode);
-      final task =
-          svg.cache.putIfAbsent(loader, () => loader.loadBytes(context));
-      tasks.add(task);
-    }
-    return Future.wait(tasks);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +28,8 @@ class CircleFlag extends StatelessWidget {
 }
 
 class FlagLoader extends AssetBytesLoader {
-  FlagLoader(String isoCode) : super(computeAssetName(isoCode));
+  final String isoCode;
+  FlagLoader(this.isoCode) : super(computeAssetName(isoCode));
 
   static String computeAssetName(String isoCode) {
     return 'packages/circle_flags/assets/optimized/${isoCode.toLowerCase()}.svg.vec';
@@ -59,6 +48,44 @@ class FlagLoader extends AssetBytesLoader {
     if (assetBundle != null) {
       return assetBundle!;
     }
+    if (context != null) {
+      return DefaultAssetBundle.of(context);
+    }
+    return rootBundle;
+  }
+
+  Object cacheKey(BuildContext? context) {
+    return isoCode;
+  }
+}
+
+class PreloadedFlagLoader extends FlagLoader {
+  final ByteData data;
+  PreloadedFlagLoader._(
+    super.isoCode,
+    this.data,
+  );
+
+  @override
+  Future<ByteData> loadBytes(BuildContext? context) {
+    return SynchronousFuture(data);
+  }
+
+  static Future<PreloadedFlagLoader> create(String isoCode) async {
+    final assetName = FlagLoader.computeAssetName(isoCode);
+    final data = await loadAsset(assetName);
+    return PreloadedFlagLoader._(isoCode, data);
+  }
+
+  static loadAsset(String assetName, [BuildContext? context]) {
+    final bundle = __resolveBundle(context);
+    return bundle
+        .load(assetName)
+        // if any error loading a flag try to show the "?" flag
+        .catchError((e) => rootBundle.load(FlagLoader.computeAssetName('xx')));
+  }
+
+  static AssetBundle __resolveBundle(BuildContext? context) {
     if (context != null) {
       return DefaultAssetBundle.of(context);
     }

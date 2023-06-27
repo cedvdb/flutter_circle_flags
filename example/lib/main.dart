@@ -14,12 +14,18 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  late Future preloading;
+  late Future<List<PreloadedFlagLoader>> preloadedLoaders;
 
   @override
   void initState() {
     super.initState();
-    preloading = CircleFlag.preload(IsoCode.values.map((e) => e.name));
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    preloadedLoaders = Future.wait(IsoCode.values
+        .map((isoCode) => PreloadedFlagLoader.create(isoCode.name)));
   }
 
   // This widget is the root of your application.
@@ -36,20 +42,22 @@ class _MyAppState extends State<MyApp> {
           title: const Text('flags'),
         ),
         body: FutureBuilder(
-          future: preloading,
-          builder: (ctx, snapshot) => ListView.builder(
-            itemCount: IsoCode.values.length,
-            itemBuilder: (ctx, index) => Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ListTile(
-                leading: CircleFlag(
-                  IsoCode.values[index].name,
-                  size: 32,
-                ),
-                title: Text(IsoCode.values[index].name),
-              ),
-            ),
-          ),
+          future: preloadedLoaders,
+          builder: (ctx, snapshot) => snapshot.hasData
+              ? ListView.builder(
+                  itemCount: IsoCode.values.length,
+                  itemBuilder: (ctx, index) => Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ListTile(
+                      leading: CircleFlag.fromLoader(
+                        snapshot.requireData[index],
+                        size: 32,
+                      ),
+                      title: Text(IsoCode.values[index].name),
+                    ),
+                  ),
+                )
+              : const CircularProgressIndicator(),
         ),
       ),
     );
