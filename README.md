@@ -26,6 +26,31 @@ CircleFlag('es');
 
 ```
 
+# Preloading
+
+You might want to preload images for a smoother list scrolling experience:
+
+```dart
+// see full example in example
+// create preloaded flag loaders bytes
+['us', 'fr'].map((isoCode) => PreloadedFlagLoader.create(isoCode)),
+// use bytes
+FutureBuilder(
+  future: preloadedLoaders,
+  builder: (ctx, snapshot) => snapshot.hasData
+      ? ListView.builder(
+          itemCount: snapshot.requireData.length,
+          itemBuilder: (context, index) => ListTile(
+            leading: CircleFlag.fromLoader(
+              snapshot.requireData[index],
+            ),
+          ),
+        )
+      : const CircularProgressIndicator(),
+),
+
+```
+
 # Issues & Contributing
 
 This package uses flags from https://github.com/HatScripts/circle-flags

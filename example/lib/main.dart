@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:circle_flags/circle_flags.dart';
+import 'package:flutter/material.dart';
 import 'package:phone_numbers_parser/phone_numbers_parser.dart';
 
 void main() {
@@ -14,9 +14,20 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  late Future<List<PreloadedFlagLoader>> preloadedLoaders;
+
   @override
   void initState() {
     super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final isoCodes = IsoCode.values.map((iso) => iso.name);
+    preloadedLoaders = Future.wait(
+      isoCodes.map((isoCode) => PreloadedFlagLoader.create(isoCode, context)),
+    );
   }
 
   // This widget is the root of your application.
@@ -32,21 +43,23 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text('flags'),
         ),
-        body: ListView(
-          cacheExtent: 100,
-          children: [
-            for (var isoCode in IsoCode.values)
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ListTile(
-                  leading: CircleFlag(
-                    isoCode.name,
-                    size: 32,
+        body: FutureBuilder(
+          future: preloadedLoaders,
+          builder: (ctx, snapshot) => snapshot.hasData
+              ? ListView.builder(
+                  itemCount: snapshot.requireData.length,
+                  itemBuilder: (context, index) => Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ListTile(
+                      leading: CircleFlag.fromLoader(
+                        snapshot.requireData[index],
+                        size: 32,
+                      ),
+                      title: Text(IsoCode.values[index].name),
+                    ),
                   ),
-                  title: Text(isoCode.name),
-                ),
-              )
-          ],
+                )
+              : const CircularProgressIndicator(),
         ),
       ),
     );

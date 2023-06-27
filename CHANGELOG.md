@@ -1,3 +1,9 @@
+## [3.0.0]
+
+* unknown flags display "?"
+* revert to assets with preloading mechanism
+* allow usage of other asset bundles
+
 ## [2.0.9]
 * recreate loader when iso code changes
 
