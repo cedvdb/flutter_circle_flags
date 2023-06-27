@@ -1,7 +1,7 @@
 library circle_flags;
 
 import 'package:flutter/material.dart';
-import 'package:vector_graphics/vector_graphics.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 /// a rounded flag
 class CircleFlag extends StatelessWidget {
@@ -10,16 +10,17 @@ class CircleFlag extends StatelessWidget {
   final String assetName;
 
   CircleFlag(this.countryCode, {Key? key, this.size = 48})
-      : assetName = 'assets/optimized/${countryCode.toLowerCase()}.svg.vec',
+      : assetName = 'assets/svg/${countryCode.toLowerCase()}.svg',
         super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ClipOval(
-      child: VectorGraphic(
-        loader: AssetBytesLoader(assetName, packageName: 'circle_flags'),
+      child: SvgPicture.asset(
+        assetName,
         width: size,
         height: size,
+        package: 'circle_flags',
       ),
     );
   }

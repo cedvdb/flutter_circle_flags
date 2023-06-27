@@ -32,9 +32,3 @@ This package uses flags from https://github.com/HatScripts/circle-flags
 
 If a change is required to one of the flag the issue should be opened in that repository.
 
-The icons are converted to an optimized binary format with the [`vector_graphics_compiler`](https://pub.dev/packages/vector_graphics_compiler)
-After adding or updating an icon, run the script 
-```shell
-dart tool/compile_svgs.dart
-```
-to convert the icon to the `.vec` format.
