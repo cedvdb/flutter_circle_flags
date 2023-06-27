@@ -32,12 +32,22 @@ You might want to preload images for a smoother list scrolling experience:
 
 ```dart
 // see full example in example
-// preload bytes
-preloadedFlags = CircleFlag.preload(isoCodes);
+// create preloaded flag loaders bytes
+['us', 'fr'].map((isoCode) => PreloadedFlagLoader.create(isoCode)),
 // use bytes
-CircleFlag.fromMemory(
-  snapshot.requireData[index],
-)
+FutureBuilder(
+  future: preloadedLoaders,
+  builder: (ctx, snapshot) => snapshot.hasData
+      ? ListView.builder(
+          itemCount: snapshot.requireData.length,
+          itemBuilder: (context, index) => ListTile(
+            leading: CircleFlag.fromLoader(
+              snapshot.requireData[index],
+            ),
+          ),
+        )
+      : const CircularProgressIndicator(),
+),
 
 ```
 
