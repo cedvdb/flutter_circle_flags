@@ -1,7 +1,7 @@
 ## [3.0.0]
 
-* revert to assets with preloading mechanism
 * unknown flags display "?"
+* revert to assets with preloading mechanism
 * allow usage of other asset bundles
 
 ## [2.0.9]
