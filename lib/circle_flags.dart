@@ -10,11 +10,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 class CircleFlag extends StatelessWidget {
   final BytesLoader loader;
   final double size;
+  final bool ovalShape;
 
-  CircleFlag(
-    String isoCode, {
+  CircleFlag(String isoCode, {
     super.key,
     this.size = 48,
+    this.ovalShape = true,
     FlagCache? cache,
   }) : loader = _createLoader(cache, isoCode);
 
@@ -31,13 +32,15 @@ class CircleFlag extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClipOval(
-      child: SvgPicture(
-        loader,
-        width: size,
-        height: size,
-      ),
+    final svg = SvgPicture(
+      loader,
+      width: size,
+      height: size,
     );
+
+    return ovalShape
+        ? ClipOval(child: svg)
+        : svg;
   }
 }
 
