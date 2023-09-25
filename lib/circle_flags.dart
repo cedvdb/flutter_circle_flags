@@ -28,7 +28,7 @@ class CircleFlag extends StatelessWidget {
     return _FlagAssetLoader(isoCode);
   }
 
-  CircleFlag.fromLoader(this.loader, {super.key, this.size = 48});
+  CircleFlag.fromLoader(this.loader, {super.key, this.ovalShape=true, this.size = 48});
 
   @override
   Widget build(BuildContext context) {
