@@ -6,16 +6,31 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-/// a rounded flag
+/// A flag of a country, rounded by default.
+///
+/// First positional argument is iso code of the country.
+/// You can check supported list [online](https://github.com/cedvdb/flutter_circle_flags/tree/main/assets/svg).
 class CircleFlag extends StatelessWidget {
   final BytesLoader loader;
   final double size;
+
+  /// [Clip] option for widget [ClipPath].
+  ///
+  /// This option have no effect if [shape] == null.
+  final Clip clipBehavior;
+
+  /// Clip the flag by [ShapeBorder], default: [CircleBorder].
+  ///
+  /// If null, return square flag.
+  final ShapeBorder? shape;
 
   CircleFlag(
     String isoCode, {
     super.key,
     this.size = 48,
     FlagCache? cache,
+    this.shape = const CircleBorder(eccentricity: 0),
+    this.clipBehavior = Clip.antiAlias,
   }) : loader = _createLoader(cache, isoCode);
 
   /// check if a flag has been preloaded if so, returns its byteloader
@@ -27,17 +42,32 @@ class CircleFlag extends StatelessWidget {
     return _FlagAssetLoader(isoCode);
   }
 
-  CircleFlag.fromLoader(this.loader, {super.key, this.size = 48});
+  CircleFlag.fromLoader(
+    this.loader, {
+    super.key,
+    this.size = 48,
+    this.shape = const CircleBorder(eccentricity: 0),
+    this.clipBehavior = Clip.antiAlias,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return ClipOval(
-      child: SvgPicture(
-        loader,
-        width: size,
-        height: size,
-      ),
+    final svg = SvgPicture(
+      loader,
+      width: size,
+      height: size,
     );
+
+    return shape == null
+        ? svg
+        : ClipPath(
+            clipper: ShapeBorderClipper(
+              shape: shape!,
+              textDirection: Directionality.maybeOf(context),
+            ),
+            clipBehavior: clipBehavior,
+            child: svg,
+          );
   }
 }
 
@@ -45,6 +75,7 @@ class CircleFlag extends StatelessWidget {
 /// it will resolve to the "?" flag if the normal asset is not found
 class _FlagAssetLoader extends SvgAssetLoader {
   final String isoCode;
+
   _FlagAssetLoader(this.isoCode) : super(computeAssetName(isoCode));
 
   static String computeAssetName(String isoCode) {
