@@ -1,15 +1,22 @@
+/// Example:
+/// ```dart
+///   CircleFlag(Flags.US); // this is a Widget
+/// ```
 library circle_flags;
 
 import 'dart:convert';
 
+import 'package:circle_flags/src/flags.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+export 'package:circle_flags/src/flags.dart';
+
 /// A flag of a country, rounded by default.
 ///
-/// First positional argument is iso code of the country.
-/// You can check supported list [online](https://github.com/cedvdb/flutter_circle_flags/tree/main/assets/svg).
+/// First positional argument is iso code of the country - can be used string
+/// or [Flags] helper.
 class CircleFlag extends StatelessWidget {
   final BytesLoader loader;
   final double size;
