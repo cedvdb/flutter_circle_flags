@@ -1,4 +1,9 @@
+## [3.0.2]
+
+* new `shape` parameter for `CircleFlag`
+
 ## [3.0.1]
+
 * made it easier to use cache, some breaking changes to just introduced cache api
   (doesn't warrant upgrade due to it just being introduced)
 

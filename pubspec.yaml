@@ -1,6 +1,6 @@
 name: circle_flags
-description: A collection of roundd flags
-version: 3.0.1
+description: A collection of flags in SVG format (very small in size) with a default rounded shape (which can be customized).
+version: 3.0.2
 repository: https://github.com/cedvdb/flutter_circle_flags
 
 environment:
