@@ -25,7 +25,7 @@ class FlagsFileBuilder implements Builder {
 
     print("Writing ${output.path}");
     final fileHeader = '''
-// GENERATED FILE
+// GENERATED FILE, timestamp: ${DateTime.now()}
 
 import 'package:circle_flags/circle_flags.dart';
 

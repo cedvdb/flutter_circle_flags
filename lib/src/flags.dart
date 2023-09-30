@@ -1,4 +1,4 @@
-// GENERATED FILE
+// GENERATED FILE, timestamp: 2023-09-30 15:11:37.097628
 
 import 'package:circle_flags/circle_flags.dart';
 
