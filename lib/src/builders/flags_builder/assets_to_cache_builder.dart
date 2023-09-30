@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:build/build.dart';
 
@@ -21,6 +22,10 @@ class AssetToCacheBuilder implements Builder {
 
     final mapEntry =
         "  static const String ${name.toUpperCase().replaceAll('-', '_')} = '$name';\n";
+
+    try {
+      File('lib/src/flags.dart').deleteSync(); // force regenerate
+    } on PathNotFoundException {}
 
     final outputId = inputId.changeExtension('.part.txt');
     return buildStep.writeAsString(outputId, mapEntry);
