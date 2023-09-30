@@ -33,6 +33,9 @@ import 'package:circle_flags/circle_flags.dart';
 abstract class Flags {
 ''';
 
+    var list = '''
+  static const values = <String>[
+''';
     var newFileContent = '';
     for (final file
         in Directory(".dart_tool/build/generated/circle_flags/assets/svg/")
@@ -41,10 +44,14 @@ abstract class Flags {
           ..sort((a, b) => a.path.compareTo(b.path))) {
       if (file is File) {
         newFileContent += file.readAsStringSync();
+        var baseName = file.path.split('/').last;
+        baseName = baseName.substring(0, baseName.length - 9); // cut .part.txt
+        list += "    '$baseName',\n";
       }
     }
 
+    list += "  ];\n";
     newFileContent += "}\n";
-    return buildStep.writeAsString(output, fileHeader + newFileContent);
+    return buildStep.writeAsString(output, fileHeader + list + newFileContent);
   }
 }
