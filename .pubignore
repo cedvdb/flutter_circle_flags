@@ -5,3 +5,6 @@ macos/
 ios/
 android/
 build/
+
+build.yaml
+lib/src/builders/
