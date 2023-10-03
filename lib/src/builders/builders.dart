@@ -5,10 +5,10 @@ import 'package:circle_flags/src/builders/flags_builder/flags_file_builder.dart'
 
 import 'flags_builder/assets_to_cache_builder.dart';
 
-Builder assetsToCache([BuilderOptions? options = null]) {
+Builder assetsToCache([BuilderOptions? options]) {
   return AssetToCacheBuilder();
 }
 
-Builder combineFlagFile([BuilderOptions? options = null]) {
+Builder combineFlagFile([BuilderOptions? options]) {
   return FlagsFileBuilder();
 }
