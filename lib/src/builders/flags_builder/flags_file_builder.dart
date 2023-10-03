@@ -29,6 +29,13 @@ class FlagsFileBuilder implements Builder {
 
   @override
   FutureOr<void> build(BuildStep buildStep) async {
+    // make sure Builders never run in user package even if user
+    // import package from git or other sources
+    // (this doesn't needed for pub.dev, because of .pubignore)
+    if (buildStep.inputId.package != 'circle_flags') {
+      return;
+    }
+
     final output = _allFileOutput(buildStep);
 
     print("Writing ${output.path}");
