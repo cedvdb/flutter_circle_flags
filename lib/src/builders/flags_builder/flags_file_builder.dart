@@ -46,7 +46,7 @@ abstract class Flags {
         newFileContent += file.readAsStringSync();
         var baseName = file.path.split('/').last;
         baseName = baseName.substring(0, baseName.length - 9); // cut .part.txt
-        list += "    '$baseName',\n";
+        list += "    ${baseName.toUpperCase().replaceAll('-', '_')},\n";
       }
     }
 
