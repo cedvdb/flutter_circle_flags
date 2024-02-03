@@ -1,8 +1,6 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:build/build.dart';
-import 'package:circle_flags/src/builders/flags_builder/flags_file_builder.dart';
 
 /// Generate one line of code for each .svg file, which will be used by [FlagsFileBuilder].
 ///
@@ -41,11 +39,6 @@ class AssetToCacheBuilder implements Builder {
 
     final mapEntry =
         "  static const String ${name.toUpperCase().replaceAll('-', '_')} = '$name';\n";
-
-    try {
-      File('lib/src/flags.dart')
-          .deleteSync(); // force regeneration, didn't work than file just deleted((
-    } on PathNotFoundException {}
 
     final outputId = inputId.changeExtension('.part.txt');
     return buildStep.writeAsString(outputId, mapEntry);

@@ -13,8 +13,8 @@ dependencies:
   flutter_svg: ^2.0.9
 
 dev_dependencies:
-  build: ^2.4.1
-  build_config: ^1.1.1
+  flag_builder:
+    path: ./packages/flag_builder
   build_runner: ^2.4.8
   flutter_lints: ^2.0.3
   flutter_test:

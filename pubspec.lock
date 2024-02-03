@@ -42,7 +42,7 @@ packages:
     source: hosted
     version: "2.1.1"
   build:
-    dependency: "direct dev"
+    dependency: transitive
     description:
       name: build
       sha256: "80184af8b6cb3e5c1c4ec6d8544d27711700bc3e6d2efad04238c7b5290889f0"
@@ -50,7 +50,7 @@ packages:
     source: hosted
     version: "2.4.1"
   build_config:
-    dependency: "direct dev"
+    dependency: transitive
     description:
       name: build_config
       sha256: bf80fcfb46a29945b423bd9aad884590fb1dc69b330a4d4700cac476af1708d1
@@ -201,6 +201,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.0"
+  flag_builder:
+    dependency: "direct dev"
+    description:
+      path: "packages/flag_builder"
+      relative: true
+    source: path
+    version: "1.0.0"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -561,5 +568,5 @@ packages:
     source: hosted
     version: "3.1.2"
 sdks:
-  dart: ">=3.2.0 <4.0.0"
+  dart: ">=3.2.4 <4.0.0"
   flutter: ">=3.7.0-0"

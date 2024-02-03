@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:build/build.dart';
-import 'package:circle_flags/src/builders/flags_builder/assets_to_cache_builder.dart';
 import 'package:path/path.dart';
 
 /// This builder create one file: lib/src/flags.dart, it run only after all calls
@@ -29,6 +28,11 @@ class FlagsFileBuilder implements Builder {
 
   @override
   FutureOr<void> build(BuildStep buildStep) async {
+    final flagFile = File('lib/src/flags.dart');
+    if (flagFile.existsSync()) {
+      flagFile.deleteSync();
+    }
+
     // make sure Builders never run in user package even if user
     // import package from git or other sources
     // (this doesn't needed for pub.dev, because of .pubignore)
@@ -41,6 +45,7 @@ class FlagsFileBuilder implements Builder {
     print("Writing ${output.path}");
     final fileHeader = '''
 // GENERATED FILE, timestamp: ${DateTime.now()}
+// Regenerate with: dart run build_runner build
 
 import 'package:circle_flags/circle_flags.dart';
 

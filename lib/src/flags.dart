@@ -1,4 +1,5 @@
-// GENERATED FILE, timestamp: 2024-02-03 11:43:36.672959
+// GENERATED FILE, timestamp: 2024-02-03 12:21:38.634723
+// Regenerate with: dart run build_runner build
 
 import 'package:circle_flags/circle_flags.dart';
 

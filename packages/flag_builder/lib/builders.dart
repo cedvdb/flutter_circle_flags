@@ -1,9 +1,9 @@
 library builder;
 
 import 'package:build/build.dart';
-import 'package:circle_flags/src/builders/flags_builder/flags_file_builder.dart';
 
-import 'flags_builder/assets_to_cache_builder.dart';
+import 'src/assets_to_cache_builder.dart';
+import 'src/flags_file_builder.dart';
 
 Builder assetsToCache([BuilderOptions? options]) {
   return AssetToCacheBuilder();
