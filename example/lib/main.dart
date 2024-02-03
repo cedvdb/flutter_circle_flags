@@ -1,6 +1,5 @@
 import 'package:circle_flags/circle_flags.dart';
 import 'package:flutter/material.dart';
-import 'package:phone_numbers_parser/phone_numbers_parser.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,8 +13,8 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  late final FlagCache _cache = FlagCache();
-  late Future<void> preloading;
+  bool preloaded = false;
+  bool showFlags = false;
 
   @override
   void initState() {
@@ -25,8 +24,11 @@ class _MyAppState extends State<MyApp> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    final isoCodes = IsoCode.values.map((iso) => iso.name);
-    preloading = _cache.preload(isoCodes);
+    // preloading flags so they how instantly (mostly useful for web)
+    if (!preloaded) {
+      CircleFlag.preload(Flags.values);
+      preloaded = true;
+    }
   }
 
   // This widget is the root of your application.
@@ -42,26 +44,29 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text('flags'),
         ),
-        body: FutureBuilder(
-          future: preloading,
-          builder: (ctx, snapshot) =>
-              snapshot.connectionState == ConnectionState.done
-                  ? ListView.builder(
-                      itemCount: IsoCode.values.length,
-                      itemBuilder: (context, index) => Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: ListTile(
-                          leading: CircleFlag(
-                            IsoCode.values[index].name,
-                            size: 32,
-                            cache: _cache,
-                          ),
-                          title: Text(IsoCode.values[index].name),
-                        ),
-                      ),
-                    )
-                  : const CircularProgressIndicator(),
-        ),
+        body: showFlags
+            ? ListView.builder(
+                itemCount: Flags.values.length,
+                itemBuilder: (context, index) => Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ListTile(
+                    leading: CircleFlag(
+                      Flags.values[index],
+                      size: 32,
+                    ),
+                    title: Text(Flags.values[index]),
+                  ),
+                ),
+              )
+            : Center(
+                child: ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        showFlags = true;
+                      });
+                    },
+                    child: const Text('show')),
+              ),
       ),
     );
   }

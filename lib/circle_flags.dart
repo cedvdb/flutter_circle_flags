@@ -14,6 +14,7 @@ export 'package:circle_flags/src/flags.dart';
 /// First positional argument is iso code of the country - can be used string
 /// or [Flags] helper.
 class CircleFlag extends StatelessWidget {
+  static final _FlagCache cache = _FlagCache();
   final BytesLoader loader;
   final double size;
 
@@ -31,27 +32,23 @@ class CircleFlag extends StatelessWidget {
     String isoCode, {
     super.key,
     this.size = 48,
-    FlagCache? cache,
     this.shape = const CircleBorder(eccentricity: 0),
     this.clipBehavior = Clip.antiAlias,
-  }) : loader = _createLoader(cache, isoCode);
+  }) : loader = _createLoader(isoCode);
 
   /// check if a flag has been preloaded if so, returns its byteloader
-  static BytesLoader _createLoader(FlagCache? cache, String isoCode) {
-    final cacheEntry = cache?._loaders[isoCode];
+  static BytesLoader _createLoader(String isoCode) {
+    final cacheEntry = cache._loaders[isoCode];
     if (cacheEntry != null) {
       return cacheEntry;
     }
     return _FlagAssetLoader(isoCode);
   }
 
-  CircleFlag.fromLoader(
-    this.loader, {
-    super.key,
-    this.size = 48,
-    this.shape = const CircleBorder(eccentricity: 0),
-    this.clipBehavior = Clip.antiAlias,
-  });
+  /// preload a list of flags in memory
+  static preload(List<String> isoCodes) {
+    return cache.preload(isoCodes);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -129,11 +126,11 @@ class _FlagAssetLoader extends SvgAssetLoader {
 /// a flag loader cache that allows for preloading
 /// svg bytes.
 /// Currently only caches preloaded items
-class FlagCache {
+class _FlagCache {
   final _loaders = <String, SvgBytesLoader>{};
 
   /// preloads flag data into svg cache
-  preload(
+  Future<void> preload(
     Iterable<String> isoCodes, [
     BuildContext? context,
     AssetBundle? assetBundle,

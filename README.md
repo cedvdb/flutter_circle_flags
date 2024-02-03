@@ -22,8 +22,7 @@ to view all flags https://hatscripts.github.io/circle-flags/gallery
 // use a valid country code
 CircleFlag('us');
 CircleFlag('fr');
-CircleFlag('es');
-
+CircleFlag(Flags.US);
 ```
 
 # Preloading
@@ -31,17 +30,7 @@ CircleFlag('es');
 You might want to preload images for a smoother list scrolling experience:
 
 ```dart
-// see full example in example
-// create preloaded flag loaders bytes
-final cache = FlagCache();
-completer = cache.preload(['fr', 'us']);
-// once the completer completes you can use
-
-CircleFlag(
-  'fr',
-  cache: cache,
-),
-
+CircleFlag.preload(['fr', 'us']);
 ```
 
 # Issues & Contributing

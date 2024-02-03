@@ -1,3 +1,6 @@
+## [4.0.0]
+* [Breaking] Use `CircleFlag.preload([isoCode])` to preload a flag. FlagCache is no longer exported. 
+
 ## [3.0.1]
 * made it easier to use cache, some breaking changes to just introduced cache api
   (doesn't warrant upgrade due to it just being introduced)
