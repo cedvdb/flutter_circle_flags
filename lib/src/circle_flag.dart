@@ -46,7 +46,7 @@ class CircleFlag extends StatelessWidget {
   }
 
   /// preload a list of flags in memory
-  static preload(List<String> isoCodes) {
+  static preload(Iterable<String> isoCodes) {
     return cache.preload(isoCodes);
   }
 

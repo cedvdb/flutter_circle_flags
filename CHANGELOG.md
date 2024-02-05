@@ -1,3 +1,6 @@
+## [4.0.1]
+* Accept iterable in preloading method
+
 ## [4.0.0]
 * [Breaking] Use `CircleFlag.preload([isoCode])` to preload a flag. FlagCache is no longer exported. 
 
