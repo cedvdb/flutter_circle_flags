@@ -58,7 +58,7 @@ class CircleFlag extends StatelessWidget {
       height: size,
     );
 
-    return shape == null
+    final clipped = shape == null
         ? svg
         : ClipPath(
             clipper: ShapeBorderClipper(
@@ -68,6 +68,9 @@ class CircleFlag extends StatelessWidget {
             clipBehavior: clipBehavior,
             child: svg,
           );
+    return ExcludeSemantics(
+      child: clipped,
+    );
   }
 }
 

@@ -1,3 +1,6 @@
+## [4.0.2]
+* Exclude from semantics
+
 ## [4.0.1]
 * Accept iterable in preloading method
 

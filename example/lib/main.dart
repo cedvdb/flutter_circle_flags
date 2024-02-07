@@ -37,12 +37,12 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        brightness: Brightness.dark,
+        brightness: Brightness.light,
         primarySwatch: Colors.blue,
       ),
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('flags'),
+          title: const Text('Flags'),
         ),
         body: showFlags
             ? ListView.builder(
@@ -55,6 +55,7 @@ class _MyAppState extends State<MyApp> {
                       size: 32,
                     ),
                     title: Text(Flags.values[index]),
+                    onTap: () {},
                   ),
                 ),
               )
