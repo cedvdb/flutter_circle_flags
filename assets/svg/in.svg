@@ -1,1 +1,48 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><g><path fill="#eee" d="m0 144.7 255.3-36.5L512 144.7v222.6L250.5 407 0 367.3z"/><path fill="#ff9811" d="M0 0h512v144.7H0z"/><path fill="#6da544" d="M0 367.3h512V512H0z"/><circle cx="256" cy="256" r="89" fill="#0052b4"/><circle cx="256" cy="256" r="55.7" fill="#eee"/><path fill="#0052b4" d="m256 187.3 17.2 39 42.3-4.6-25.2 34.3 25.2 34.3-42.3-4.6-17.2 39-17.2-39-42.3 4.6 25.2-34.3-25.2-34.3 42.3 4.6z"/></g></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="900" height="600"
+     viewBox="0 0 300 200"
+     role="img" aria-labelledby="title desc">
+  <title id="title">Flag of India (Tiranga)</title>
+  <desc id="desc">Three horizontal bands of saffron, white and green with a navy 24-spoke Ashoka Chakra in the center.</desc>
+
+  <rect x="0" y="0" width="300" height="66.6666667" fill="#FF9933"/>
+
+  <rect x="0" y="66.6666667" width="300" height="66.6666667" fill="#FFFFFF"/>
+
+  <rect x="0" y="133.3333334" width="300" height="66.6666667" fill="#138808"/>
+
+
+  <g id="chakra" transform="translate(0,0)">
+    <circle cx="150" cy="100" r="20" fill="none" stroke="#000080" stroke-width="2"/>
+
+    <circle cx="150" cy="100" r="2.2" fill="#000080"/>
+
+    <g stroke="#000080" stroke-width="1" stroke-linecap="round">
+      <line x1="150" y1="80" x2="150" y2="120" transform="rotate(0 150 100)"/>
+      <line x1="150" y1="80" x2="150" y2="120" transform="rotate(15 150 100)"/>
+      <line x1="150" y1="80" x2="150" y2="120" transform="rotate(30 150 100)"/>
+      <line x1="150" y1="80" x2="150" y2="120" transform="rotate(45 150 100)"/>
+      <line x1="150" y1="80" x2="150" y2="120" transform="rotate(60 150 100)"/>
+      <line x1="150" y1="80" x2="150" y2="120" transform="rotate(75 150 100)"/>
+      <line x1="150" y1="80" x2="150" y2="120" transform="rotate(90 150 100)"/>
+      <line x1="150" y1="80" x2="150" y2="120" transform="rotate(105 150 100)"/>
+      <line x1="150" y1="80" x2="150" y2="120" transform="rotate(120 150 100)"/>
+      <line x1="150" y1="80" x2="150" y2="120" transform="rotate(135 150 100)"/>
+      <line x1="150" y1="80" x2="150" y2="120" transform="rotate(150 150 100)"/>
+      <line x1="150" y1="80" x2="150" y2="120" transform="rotate(165 150 100)"/>
+      <line x1="150" y1="80" x2="150" y2="120" transform="rotate(180 150 100)"/>
+      <line x1="150" y1="80" x2="150" y2="120" transform="rotate(195 150 100)"/>
+      <line x1="150" y1="80" x2="150" y2="120" transform="rotate(210 150 100)"/>
+      <line x1="150" y1="80" x2="150" y2="120" transform="rotate(225 150 100)"/>
+      <line x1="150" y1="80" x2="150" y2="120" transform="rotate(240 150 100)"/>
+      <line x1="150" y1="80" x2="150" y2="120" transform="rotate(255 150 100)"/>
+      <line x1="150" y1="80" x2="150" y2="120" transform="rotate(270 150 100)"/>
+      <line x1="150" y1="80" x2="150" y2="120" transform="rotate(285 150 100)"/>
+      <line x1="150" y1="80" x2="150" y2="120" transform="rotate(300 150 100)"/>
+      <line x1="150" y1="80" x2="150" y2="120" transform="rotate(315 150 100)"/>
+      <line x1="150" y1="80" x2="150" y2="120" transform="rotate(330 150 100)"/>
+      <line x1="150" y1="80" x2="150" y2="120" transform="rotate(345 150 100)"/>
+    </g>
+  </g>
+</svg>
