@@ -72,6 +72,7 @@ abstract class Flag {
     ER,
     ES,
     ET,
+    EU,
     FI,
     FJ,
     FK,
@@ -320,6 +321,7 @@ abstract class Flag {
   static const String ER = 'er';
   static const String ES = 'es';
   static const String ET = 'et';
+  static const String EU = 'eu';
   static const String FI = 'fi';
   static const String FJ = 'fj';
   static const String FK = 'fk';
