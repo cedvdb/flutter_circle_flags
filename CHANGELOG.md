@@ -1,3 +1,6 @@
+## [6.0.0]
+* upgrade to material_ui
+
 ## [5.0.1]
 * Fix for build runner issue
 
