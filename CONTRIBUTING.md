@@ -76,3 +76,10 @@ generator on a clean checkout produces no diff.
    `CHANGELOG.md`.
 2. Run `flutter pub publish --dry-run` and fix anything it reports.
 3. Run `flutter pub publish`.
+
+The published archive is built from the files tracked by git, minus what the
+ignore files exclude. Never add a `.pubignore` to the repository root: a
+`.pubignore` *replaces* the `.gitignore` rules of the directory it is placed in
+instead of adding to them, so a root one would start publishing
+`example/build/`, `build/` and `*.log`. The `assets/.pubignore` works precisely
+because it only overrides the rules of `assets/`.
