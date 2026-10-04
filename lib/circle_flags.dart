@@ -1,5 +1,5 @@
-/// library to display circle flags
-library circle_flags;
+/// A library to display circular country flags.
+library;
 
 export 'src/circle_flag.dart';
 export 'src/flag.dart';

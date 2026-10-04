@@ -1,5 +1,6 @@
 // GENERATED FILE. DO NOT MODIFY BY HAND.
-// Run `dart run tool/generate_flags.dart` to regenerate.
+// Run `dart run tool/generate_flag.dart` to regenerate.
+// ignore_for_file: constant_identifier_names
 
 /// List of available flags (ISO codes) for [CircleFlag].
 abstract class Flag {

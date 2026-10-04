@@ -1,0 +1,10 @@
+# Files under `assets/` that are not shipped to pub.dev.
+#
+# A `.pubignore` file overrides the `.gitignore` rules for the directory it is
+# placed in, so this file only affects `assets/`: the files below stay in git,
+# but are left out of the published package archive.
+#
+# `assets/svg/` (declared in pubspec.yaml, used at runtime) is published as
+# usual; `assets/svg_hatscripts/` is the pristine upstream copy that is only
+# used while curating `assets/svg/`, see CONTRIBUTING.md.
+svg_hatscripts/

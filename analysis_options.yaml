@@ -1,0 +1,7 @@
+# Lint rules for the circle_flags package.
+#
+# See https://dart.dev/tools/linter-rules for the list of available rules.
+analyzer:
+  exclude:
+    - build/**
+include: package:flutter_lints/flutter.yaml
